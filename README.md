@@ -1,90 +1,170 @@
-# OpenCode Skills 仓库
+# OpenCode Skills Repository
 
-此仓库包含两个OpenCode技能：
+本仓库包含用于OpenCode AI助手的技能(Skills)集合。这些技能可以扩展OpenCode的功能，帮助处理特定任务。
 
-1. **jiandaoyun-api** - 简道云API开发专家
-2. **lowes-to-shipstation** - Lowes订单转ShipStation导入工具
+## 可用技能
 
-## 如何推送到GitHub仓库
+### 1. **jiandaoyun-api** - 简道云API开发专家
+- **功能**: 简道云Open API开发专家，提供完整的接口文档、鉴权方式、错误码及多语言代码示例
+- **用途**: 简道云接口调用、插件开发、数据对接、错误排查
+- **目录**: `jiandaoyun-api/`
 
-已准备好本地仓库，包含所有技能文件。您需要将其推送到远程仓库 `https://github.com/sakuree/skills.git`。
+### 2. **lowes-to-shipstation** - Lowes订单转ShipStation导入工具  
+- **功能**: 将简道云导出的Lowes订单数据转换为ShipStation系统导入模板
+- **用途**: 订单数据处理、格式转换、电商订单管理
+- **目录**: `lowes-to-shipstation/`
 
-### 方法1：使用SSH密钥（推荐）
+## 安装方法
 
-如果您已设置SSH密钥：
-
-```bash
-cd /home/sayjonny/skills-repo
-git remote set-url origin git@github.com:sakuree/skills.git
-git push -u origin main
-```
-
-### 方法2：使用个人访问令牌（PAT）
-
-1. 在GitHub上生成个人访问令牌（需要`repo`权限）
-2. 使用以下命令：
+### 方法一：使用安装脚本（推荐）
 
 ```bash
-cd /home/sayjonny/skills-repo
-git remote set-url origin https://你的用户名:你的令牌@github.com/sakuree/skills.git
-git push -u origin main
+# 克隆仓库
+git clone https://github.com/sakuree/skills.git
+cd skills
+
+# 运行安装脚本
+chmod +x install.sh
+./install.sh
 ```
 
-### 方法3：使用GitHub CLI
-
-如果已安装GitHub CLI：
+### 方法二：手动安装
 
 ```bash
-cd /home/sayjonny/skills-repo
-gh auth login
-git push -u origin main
+# 克隆仓库
+git clone https://github.com/sakuree/skills.git
+
+# 创建技能目录（如果不存在）
+mkdir -p ~/.config/opencode/skills/
+
+# 复制技能到OpenCode配置目录
+cp -r skills/jiandaoyun-api ~/.config/opencode/skills/
+cp -r skills/lowes-to-shipstation ~/.config/opencode/skills/
 ```
 
-### 方法4：手动配置凭据
+### 方法三：创建符号链接（便于更新）
 
 ```bash
-cd /home/sayjonny/skills-repo
-git config credential.helper store
-git push -u origin main
-# 第一次会提示输入用户名和密码（使用令牌作为密码）
+# 克隆仓库到本地
+git clone https://github.com/sakuree/skills.git ~/.opencode-skills
+
+# 创建符号链接
+ln -sf ~/.opencode-skills/jiandaoyun-api ~/.config/opencode/skills/
+ln -sf ~/.opencode-skills/lowes-to-shipstation ~/.config/opencode/skills/
 ```
 
-## 技能详情
+## 使用方法
 
-### jiandaoyun-api
-- 位置：`jiandaoyun-api/`
-- 功能：简道云Open API开发专家，提供完整的接口文档、鉴权方式、错误码及多语言代码示例
+安装后，在OpenCode中可以通过`skill`工具调用这些技能：
 
-### lowes-to-shipstation  
-- 位置：`lowes-to-shipstation/`
-- 功能：将简道云导出的Lowes订单数据转换为ShipStation系统导入模板，支持尺寸取整、重量转换、多数量订单拆分
+```
+# 在OpenCode对话中
+skill({ name: "jiandaoyun-api" })
+
+# 或者直接询问
+"如何使用简道云API新增数据？"
+"帮我转换Lowes订单数据为ShipStation格式"
+```
+
+## 验证安装
+
+```bash
+# 检查技能是否已安装
+ls -la ~/.config/opencode/skills/
+
+# 应该看到：
+# jiandaoyun-api/
+# lowes-to-shipstation/
+```
+
+## 添加新技能
+
+要添加新技能到本仓库：
+
+1. 在仓库根目录创建新技能文件夹，如 `new-skill-name/`
+2. 在文件夹中创建 `SKILL.md` 文件（必须包含YAML frontmatter）
+3. 添加相关支持文件（Python脚本、配置文件等）
+4. 提交并推送到GitHub
+
+技能文件夹结构示例：
+```
+new-skill-name/
+├── SKILL.md          # 技能定义文件（必须）
+├── skill.json        # 技能元数据（可选）
+├── manifest.json     # 清单文件（可选）
+├── *.py              # Python脚本（可选）
+└── docs/             # 文档目录（可选）
+```
+
+## 更新技能
+
+```bash
+# 拉取最新版本
+cd skills
+git pull
+
+# 重新安装（如果使用复制方式）
+./install.sh
+```
+
+## 卸载技能
+
+```bash
+# 使用卸载脚本
+./uninstall.sh
+
+# 或手动删除
+rm -rf ~/.config/opencode/skills/jiandaoyun-api
+rm -rf ~/.config/opencode/skills/lowes-to-shipstation
+```
 
 ## 文件结构
 
 ```
-skills-repo/
-├── .git/
-├── jiandaoyun-api/
-│   ├── SKILL.md
-│   ├── query.py
-│   ├── skill.json
-│   ├── manifest.json
-│   ├── convert.py (注：实际在lowes-to-shipstation中)
-│   └── docs/ (完整文档)
-└── lowes-to-shipstation/
-    ├── SKILL.md
-    ├── convert.py
-    ├── query.py
-    ├── skill.json
-    └── manifest.json
+skills/
+├── README.md                    # 本文件
+├── install.sh                   # 安装脚本
+├── uninstall.sh                 # 卸载脚本
+├── jiandaoyun-api/              # 技能1
+│   ├── SKILL.md                 # 技能定义
+│   ├── skill.json               # 技能元数据
+│   ├── manifest.json            # 清单文件
+│   ├── query.py                 # 查询脚本
+│   └── docs/                    # 详细文档
+│       ├── 01_Core_API/
+│       ├── 02_Auth_Config/
+│       ├── 03_Python_Implementation/
+│       ├── 04_Webhooks/
+│       └── 05_Advanced_Fields/
+└── lowes-to-shipstation/        # 技能2
+    ├── SKILL.md                 # 技能定义
+    ├── skill.json               # 技能元数据
+    ├── manifest.json            # 清单文件
+    ├── convert.py               # 转换脚本
+    └── query.py                 # 查询脚本
 ```
+
+## 贡献指南
+
+1. Fork本仓库
+2. 创建新分支：`git checkout -b feature/new-skill`
+3. 添加新技能或改进现有技能
+4. 提交更改：`git commit -m "Add new skill: xxx"`
+5. 推送到分支：`git push origin feature/new-skill`
+6. 创建Pull Request
+
+## 许可证
+
+本仓库中的技能遵循各自的许可证，请查看各技能目录中的LICENSE文件（如果存在）。
+
+## 支持
+
+如有问题或建议，请：
+1. 在GitHub Issues中提交问题
+2. 或通过电子邮件联系
 
 ## 注意事项
 
-- 已提交初始提交：`Add initial skills: jiandaoyun-api and lowes-to-shipstation`
-- 仓库已配置用户信息：`opencode-assistant <opencode@example.com>`
-- 如需更改用户信息：`git config user.name "您的姓名" && git config user.email "您的邮箱"`
-
-## 验证推送
-
-推送成功后，访问：https://github.com/sakuree/skills 查看仓库内容。
+- 确保OpenCode已正确安装和配置
+- 某些技能可能需要额外的Python依赖包
+- 定期更新以获取最新功能和修复

@@ -1,0 +1,51 @@
+# OpenCode Skills Repository .gitignore
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.bak
+*.tmp
+
+# 编辑器/IDE文件
+.vscode/
+.idea/
+*.code-workspace
+
+# 日志文件
+*.log
+logs/
+
+# 环境文件
+.env
+.env.local
+.env.*.local
+
+# 运行时文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 安装测试文件
+test_install/
+temp/
+
+# 用户特定文件
+user-config.json
+personal-notes.md
+
+# 大型数据文件
+*.csv
+*.xlsx
+*.xls
+*.data
+*.dat
+*.db
+*.sqlite
+
+# 排除已安装技能的备份
+*-backup/
+backup/

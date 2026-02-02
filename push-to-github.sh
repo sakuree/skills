@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 推送技能到GitHub仓库的脚本
+# 推送OpenCode技能到GitHub仓库的脚本
 
 set -e
 
@@ -12,7 +12,7 @@ echo
 # 检查是否在正确的目录
 if [ ! -d ".git" ]; then
     echo "错误: 当前目录不是Git仓库"
-    echo "请确保在 skills-repo 目录中运行此脚本"
+    echo "请确保在仓库根目录中运行此脚本"
     exit 1
 fi
 
