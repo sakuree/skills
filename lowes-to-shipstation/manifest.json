@@ -1,0 +1,52 @@
+{
+  "name": "lowes-to-shipstation",
+  "version": "7.0.0",
+  "description": "Lowes订单转ShipStation导入工具",
+  "author": "opencode-assistant",
+  "index": [
+    "Lowes订单转换",
+    "ShipStation导入",
+    "简道云导出",
+    "尺寸取整",
+    "重量转换",
+    "订单拆分",
+    "CSV处理",
+    "Excel处理",
+    "字段映射",
+    "PO Number",
+    "Item SKU",
+    "Recipient Name",
+    "Address Line 1",
+    "City",
+    "State",
+    "Postal Code",
+    "长度",
+    "宽度",
+    "高度",
+    "磅转盎司",
+    "多数量订单"
+  ],
+  "themes": {
+    "conversion": [
+      "Lowes订单转换",
+      "ShipStation导入",
+      "字段映射"
+    ],
+    "processing": [
+      "尺寸取整",
+      "重量转换",
+      "订单拆分",
+      "CSV处理",
+      "Excel处理"
+    ],
+    "fields": [
+      "PO Number",
+      "Item SKU",
+      "Recipient Name",
+      "Address Line 1",
+      "City",
+      "State",
+      "Postal Code"
+    ]
+  }
+}

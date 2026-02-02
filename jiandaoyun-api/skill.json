@@ -1,0 +1,28 @@
+{
+  "id": "jiandaoyun-api",
+  "name": "简道云API开发助手",
+  "description": "简道云 Open API 开发专家，提供完整的接口文档、鉴权方式、错误码及 Python/Node.js/cURL 代码示例。支持表单数据增删改查、通讯录管理、Webhook配置、插件开发等全部API能力。",
+  "version": "1.0.0",
+  "author": "sakuree",
+  "tags": ["简道云", "API", "RPA", "数据集成", "影刀"],
+  "entry": "SKILL.md",
+  "files": [
+    "docs/01_Core_API/*.md",
+    "docs/02_Auth_Config/*.md",
+    "docs/03_Python_Implementation/*.md",
+    "docs/04_Webhooks/*.md",
+    "docs/05_Advanced_Fields/*.md"
+  ],
+  "capabilities": {
+    "api_reference": true,
+    "code_examples": true,
+    "error_handling": true,
+    "authentication": true
+  },
+  "usage": {
+    "query_api": "查询简道云API接口文档",
+    "debug_error": "排查API调用错误",
+    "get_code_example": "获取Python/Node.js代码示例",
+    "check_auth": "查看鉴权配置方法"
+  }
+}

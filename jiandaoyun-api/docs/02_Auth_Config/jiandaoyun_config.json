@@ -1,0 +1,22 @@
+{
+  "name": "jiandaoyun-api",
+  "description": "Jiandaoyun API documentation",
+  "sources": [
+    {
+      "url": "https://hc.jiandaoyun.com/open/10992",
+      "base_url": "https://hc.jiandaoyun.com/open/",
+      "max_depth": 5,
+      "selectors": {
+        "content": "article, .article-content, .markdown-body, #doc-content",
+        "title": "h1"
+      },
+      "ignore": [
+        "footer",
+        "nav",
+        ".sidebar",
+        ".advertisement"
+      ]
+    }
+  ],
+  "output_dir": "D:/trae/skill/.trae/skills/jiandaoyun-api"
+}
