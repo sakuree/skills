@@ -202,7 +202,7 @@ def convert_row(row: Dict[str, Any]) -> List[Dict[str, str]]:
         new_row["Item SKU"] = sku
         new_row["Item Quantity"] = "1"
         new_row["Weight(oz)"] = str(weight_oz)
-        new_row["Item Weight (oz)"] = str(weight_oz)
+        new_row["Item Weight (oz)"] = ""
         new_row["Length(in)"] = str(length) if length != "" else ""
         new_row["Width(in)"] = str(width) if width != "" else ""
         new_row["Height(in)"] = str(height) if height != "" else ""
