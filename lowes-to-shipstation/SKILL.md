@@ -9,6 +9,8 @@ description: "将简道云导出的Lowes订单数据转换为ShipStation系统�
 
 ## 功能特点
 
+- **完整工作流**: 集成订单拆分和ShipStation转换，支持三种处理模式
+- **双文件输出**: 可同时生成拆分后的Excel文件和ShipStation导入CSV文件
 - **格式转换**: 将Lowes订单数据映射到ShipStation所需的52个字段
 - **尺寸优化**: 自动对长宽高进行四舍五入，小于1的尺寸强制设为1（V7版本优化）
 - **重量转换**: 自动将磅(lb)转换为盎司(oz)
@@ -20,13 +22,34 @@ description: "将简道云导出的Lowes订单数据转换为ShipStation系统�
 
 ### 命令行使用
 
+#### 1. 集成工具（推荐）
+完整工作流：拆分订单并转换为ShipStation格式，生成两个文件。
+
 ```bash
-# 基本用法
+# 完整流程：拆分订单并转换为ShipStation格式（生成两个文件）
+python process_lowes_orders.py Lowes_Orders.xlsx
+
+# 仅拆分订单（生成拆分后的Excel文件）
+python process_lowes_orders.py Lowes_Orders.xlsx --split-only
+
+# 仅转换为ShipStation格式（生成CSV导入文件）
+python process_lowes_orders.py Lowes_Orders.xlsx --convert-only
+
+# 自定义输出
+python process_lowes_orders.py Lowes_Orders.xlsx --output-dir ./output --prefix processed
+```
+
+#### 2. 独立工具
+```bash
+# 基本用法（仅转换）
 python convert.py 输入文件 输出文件
 
 # 示例
 python convert.py lowes_orders.csv shipstation_import.csv
 python convert.py lowes_orders.xlsx shipstation_output.csv
+
+# 订单拆分工具
+python split_orders.py orders.xlsx --qty-col "数量" --po-col "订单号"
 ```
 
 ### 在OpenCode中调用
@@ -35,7 +58,20 @@ python convert.py lowes_orders.xlsx shipstation_output.csv
 
 1. 确保已安装依赖：`pip install pandas openpyxl`
 2. 使用技能提供的转换脚本
-3. 或者直接询问技能如何使用
+ 3. 或者直接询问技能如何使用
+
+## 输出文件
+
+使用集成工具 `process_lowes_orders.py` 可以生成以下文件：
+
+| 文件类型 | 文件名格式 | 内容说明 |
+|----------|------------|----------|
+| 拆分后的订单数据 | `[前缀]_split.xlsx` | 原始Lowes订单数据，Quantity > 1的行已拆分为多行，PO Number添加后缀（如-1, -2） |
+| ShipStation导入模板 | `[前缀]_shipstation.csv` | 符合ShipStation导入格式的CSV文件，包含47个标准字段 |
+
+示例输出文件：
+- `Lowes_Orders_split.xlsx` - 拆分后的Excel订单数据
+- `Lowes_Orders_shipstation.csv` - ShipStation导入CSV文件
 
 ## 字段映射
 
@@ -93,6 +129,7 @@ pip install pandas openpyxl
 
 ## 版本历史
 
+- **V8.0**: 集成工具版本，新增完整工作流支持，可同时生成拆分文件和ShipStation文件
 - **V7.0**: 尺寸优化版本，增加小于1的尺寸强制设为1的保底机制
 - **V1.0**: 基础版本，实现基本字段映射和转换功能
 
