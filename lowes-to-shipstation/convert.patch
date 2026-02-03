@@ -1,0 +1,13 @@
+diff --git a/lowes-to-shipstation/convert.py b/lowes-to-shipstation/convert.py
+index ea97d93..cda1f10 100644
+--- a/lowes-to-shipstation/convert.py
++++ b/lowes-to-shipstation/convert.py
+@@ -202,7 +202,7 @@ def convert_row(row: Dict[str, Any]) -> List[Dict[str, str]]:
+         new_row["Item SKU"] = sku
+         new_row["Item Quantity"] = "1"
+         new_row["Weight(oz)"] = str(weight_oz)
+-        new_row["Item Weight (oz)"] = str(weight_oz)
++        new_row["Item Weight (oz)"] = ""
+         new_row["Length(in)"] = str(length) if length != "" else ""
+         new_row["Width(in)"] = str(width) if width != "" else ""
+         new_row["Height(in)"] = str(height) if height != "" else ""

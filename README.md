@@ -5,13 +5,19 @@
 ## 可用技能
 
 ### 1. **jiandaoyun-api** - 简道云API开发专家
-- **功能**: 简道云Open API开发专家，提供完整的接口文档、鉴权方式、错误码及多语言代码示例
+- **功能**: 简道云Open API开发专家，提供完整的接口文档（表单、数据、通讯录等）、鉴权方式、错误码及多语言代码示例
 - **用途**: 简道云接口调用、插件开发、数据对接、错误排查
+- **核心功能**: API查询、代码生成（Python/Node.js/cURL）、错误排查、Schema校验
+- **包含模块**: 身份认证、表单接口、数据管理、Webhook、前端组件
+- **使用示例**: "如何调用新增数据接口？"、"错误码40010解决方案"、"Python批量更新数据示例"
 - **目录**: `jiandaoyun-api/`
 
 ### 2. **lowes-to-shipstation** - Lowes订单转ShipStation导入工具  
-- **功能**: 将简道云导出的Lowes订单数据转换为ShipStation系统导入模板
+- **功能**: 将简道云导出的Lowes订单数据转换为ShipStation系统导入模板，支持CSV和Excel格式，自动处理尺寸取整、重量转换和多数量订单拆分
 - **用途**: 订单数据处理、格式转换、电商订单管理
+- **核心功能**: 完整工作流集成、双文件输出、格式转换、尺寸优化、重量转换、数量处理、编码支持、格式支持
+- **使用方法**: 命令行工具（集成工具 `process_lowes_orders.py` 和独立工具 `convert.py`、`split_orders.py`）、OpenCode调用
+- **输出文件**: 拆分后的订单数据Excel文件（`*_split.xlsx`）和ShipStation导入CSV文件（`*_shipstation.csv`）
 - **目录**: `lowes-to-shipstation/`
 
 ## 安装方法
@@ -140,7 +146,10 @@ skills/
     ├── SKILL.md                 # 技能定义
     ├── skill.json               # 技能元数据
     ├── manifest.json            # 清单文件
-    ├── convert.py               # 转换脚本
+    ├── convert.py               # 基础转换脚本
+    ├── convert_modified.py      # 优化版本转换脚本
+    ├── process_lowes_orders.py  # 集成工具（完整工作流）
+    ├── split_orders.py          # 订单拆分工具
     └── query.py                 # 查询脚本
 ```
 
